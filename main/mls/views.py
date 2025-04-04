@@ -3,7 +3,7 @@ import requests
 import urllib.parse
 from .models import Movie
 
-OMDB_API_KEY = "17432b61"
+OMDB_API_KEY = "4e8e495e"
 YOUTUBE_API_KEY = "AIzaSyCRG_J64TRdb1EEHW0G07e9FfhwcLFsLlA"
 
 OMDB_API_URL = "https://www.omdbapi.com/?apikey={}&t={}"
