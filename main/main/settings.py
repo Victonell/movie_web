@@ -15,6 +15,9 @@ import dj_database_url
 import os
 
 
+
+LOGIN_REDIRECT_URL = 'home'
+
 DATABASES = {
     'default': dj_database_url.config(
         default='postgres://bmovie_db_user:PfXklCL1uKBWYWADEFJss5TQ8i3HIqt6@dpg-cvo76qmmcj7s73fuo3p0-a/bmovie_db'
@@ -65,8 +68,9 @@ ROOT_URLCONF = 'main.urls'
 
 TEMPLATES = [
     {
+        
+        'DIRS': [BASE_DIR / 'template'],  # this matches your folder name
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'template')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

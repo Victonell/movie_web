@@ -1,89 +1,160 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <title>Welcome to bMovies</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Landing Page</title>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
+            box-sizing: border-box;
         }
 
-        .hero {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            background: url('movie-banner.jpg') no-repeat center center/cover;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+        html,
+        body {
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .hero-content {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background: red;
+        body {
+            background: url('https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
             color: white;
-            text-decoration: none;
-            font-size: 18px;
-            border-radius: 5px;
-            margin-top: 20px;
+            position: relative;
         }
 
-        .movies-section {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .movie-card {
-            display: inline-block;
-            width: 200px;
-            margin: 10px;
-            text-align: center;
-        }
-
-        .movie-card img {
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
             width: 100%;
-            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        .wrapper {
+            position: relative;
+            z-index: 2;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #e50914;
+            margin-bottom: 15px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .tagline {
+            font-size: 1.4rem;
+            color: #ddd;
+            margin-bottom: 40px;
+            max-width: 600px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeInUp 1.4s ease-out;
+        }
+
+        .cta-btn {
+            background-color: #e50914;
+            color: white;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .cta-btn:hover {
+            background-color: #ff1c1c;
+            transform: scale(1.05);
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #aaa;
+            z-index: 2;
+        }
+
+        @media (max-width: 600px) {
+            .logo {
+                font-size: 2.8rem;
+            }
+
+            .tagline {
+                font-size: 1.1rem;
+            }
+
+            .cta-btn {
+                padding: 12px 24px;
+                font-size: 0.95rem;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="hero">
-        <div class="hero-content">
-            <h1>Welcome to MovieFlix</h1>
-            <p>Watch the latest and greatest movies online.</p>
-            <a href="#movies" class="btn">Browse Movies</a>
+    <div class="overlay"></div>
+
+    <div class="wrapper">
+        <div class="logo">bMovies</div>
+        <div class="tagline">Stream the latest , timeless classics, and everything in between.</div>
+
+        {% block content %}
+        <div class="btn-group">
+            <a href="{% url 'home' %}" class="cta-btn">Explore Movies</a>
+            <a href="{% url 'login' %}" class="cta-btn">Log In</a>
+            <a href="{% url 'signup' %}" class="cta-btn">Sign Up</a>
         </div>
+        {% endblock %}
     </div>
-    <div class="movies-section" id="movies">
-        <h2>Popular Movies</h2>
-        <div class="movie-card">
-            <img src="movie1.jpg" alt="Movie 1">
-            <p>Movie Title 1</p>
-        </div>
-        <div class="movie-card">
-            <img src="movie2.jpg" alt="Movie 2">
-            <p>Movie Title 2</p>
-        </div>
-        <div class="movie-card">
-            <img src="movie3.jpg" alt="Movie 3">
-            <p>Movie Title 3</p>
-        </div>
-    </div>
+
+    <div class="footer">© 2025 bMovies. All rights reserved.</div>
 </body>
 
 </html>

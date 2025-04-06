@@ -1,13 +1,43 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
 import requests
 import urllib.parse
 from .models import Movie
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+    return render(request, 'signup.html', {'form': form})
 
 OMDB_API_KEY = "17432b61"
 YOUTUBE_API_KEY = "AIzaSyCRG_J64TRdb1EEHW0G07e9FfhwcLFsLlA"
 
 OMDB_API_URL = "https://www.omdbapi.com/?apikey={}&t={}"
 YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q={}%20trailer&key={}"
+
+def landing_page(request):
+    return render(request, 'landing_page.html')
+
+def home(request):
+    return render(request, 'home.html')
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = UserCreationForm() # type: ignore
+    return render(request, 'signup.html', {'form': form})
 
 def admin(request):
     movie_data = None

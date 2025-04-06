@@ -1,0 +1,26 @@
+{% extends 'landing_page.html' %}
+{% block content %}
+<div style="display: flex; justify-content: center; align-items: center; height: 80vh;">
+    <div
+        style="background-color: rgba(255, 255, 255, 0.1); padding: 40px; border-radius: 15px; width: 100%; max-width: 400px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+        <h2 style="text-align:center; color: #fff; margin-bottom: 20px;">Log In to bMovies</h2>
+
+        <form method="post" style="display: flex; flex-direction: column; gap: 20px;">
+            {% csrf_token %}
+            {% for field in form %}
+            <div>
+                <label style="color: #ccc;">{{ field.label_tag }}</label>
+                {{ field }}
+                {% if field.errors %}
+                <div style="color: #ff4d4d;">{{ field.errors }}</div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <button type="submit"
+                style="padding: 12px 20px; background-color: #e50914; color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 1rem;">
+                Log In
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
